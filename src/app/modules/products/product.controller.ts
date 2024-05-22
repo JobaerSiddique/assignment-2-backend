@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ProductValidationSchema } from "./product.zod";
+import { ProductValidationSchema, updateProductValidation } from "./product.zod";
 import { productService } from "./product.service";
 import { ProductModel } from "./product.model";
 
@@ -100,9 +100,9 @@ const updateProduct = async(req:Request,res: Response)=>{
     try {
         const {productId} = req.params;
     const updateProducts = req.body;
+    const verifyType = await updateProductValidation.parse(updateProducts)
     
-    
-    const updated = await productService.getUpdateProductsDB(productId,updateProducts)
+    const updated = await productService.getUpdateProductsDB(productId,verifyType)
     res.status(200).json({
         success:true,
         message:"Product updated successfully!",
