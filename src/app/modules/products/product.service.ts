@@ -21,7 +21,7 @@ const getAllProductDB = async(searchItem?:string)=>{
             { description: { $regex: searchItem, $options:'i' } },
             { tags: { $regex: searchItem, $options:'i' } }
           ],
-          isDeleted: false
+          
         });
     }
     else{
