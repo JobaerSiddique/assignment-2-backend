@@ -31,9 +31,9 @@ const getAllProductDB = async(searchItem?:string)=>{
 
 
 const getSingleProductsDB  = async(id:string)=>{
-    console.log("id",id)
+    
     const getProductId = await ProductModel.findById(id)
-    console.log("getser",getProductId)
+    
         
     return getProductId;
 }

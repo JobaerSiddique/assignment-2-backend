@@ -8,32 +8,32 @@ import { productService } from "./product.service";
 const CreateProducts = async(req:Request,res:Response)=>{
     try {
         const proudcts= req.body
-        console.log(proudcts)
+      
         const vaildationProduct = ProductValidationSchema.parse(proudcts)
         // console.log(vaildationProduct)
 
         const result = await productService.createProductIntoDB(vaildationProduct)
-        console.log(result)
+      
         res.status(200).json({
             success:true,
             message:"Product created sucessfully",
             data:result
         })
        
-    } catch (error) {
-        if(error){
+    } catch (error:any) {
+       
             res.status(400).json({
                 success:false,
-                message:error
+                message:error.message
             })
-        }
+        
     }
 }
 
 
 const getAllProduct = async(req:Request,res:Response)=>{
     const searchProduct = req.query.searchTerm as string | undefined 
-    console.log(searchProduct)
+    
     try {
         let products ;
         if(searchProduct){
@@ -47,7 +47,7 @@ const getAllProduct = async(req:Request,res:Response)=>{
         }
         else{
             products = await productService.getAllProductDB()
-            console.log(products)
+           
             res.status(200).json({
                 success:true,
                 message:"Product fetched successfully!",
@@ -86,7 +86,7 @@ const deleteProducts = async(req:Request,res:Response)=>{
     try {
        
         const {productId}= req.params;
-    const result = await productService.deleteProductsDB(productId)
+     await productService.deleteProductsDB(productId)
 
   
         res.status(200).json({
