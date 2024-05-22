@@ -17,6 +17,6 @@ app.use('/api/products', product_routes_1.ProductRoutes);
 app.use('/api/orders', order_routes_1.orderRoutes);
 // test section
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Server is Start');
 });
 exports.default = app;

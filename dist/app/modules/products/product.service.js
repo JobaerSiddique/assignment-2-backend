@@ -24,7 +24,6 @@ const getAllProductDB = (searchItem) => __awaiter(void 0, void 0, void 0, functi
                 { description: { $regex: searchItem, $options: 'i' } },
                 { tags: { $regex: searchItem, $options: 'i' } }
             ],
-            isDeleted: false
         });
     }
     else {
