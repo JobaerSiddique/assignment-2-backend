@@ -39,17 +39,20 @@ const createOrders = async(orders:TOrder)=>{
 
 const getAllOrdersDB = async(email?:string)=>{
     
-    const emailquery:any = {}
-    let orders;
+  
+    
     if(email){
-        emailquery.email= email
+       return await orderModel.find({email})
     }
-    console.log("email service",emailquery.email)
- orders= await orderModel.find({emailquery})
+    else{
+      return  await orderModel.find({})
+    }
+    
+ 
 
     
 
-    return orders
+    
     
 }
 

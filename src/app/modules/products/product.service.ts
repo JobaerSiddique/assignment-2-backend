@@ -12,7 +12,7 @@ const createProductIntoDB = async (productData: TProducts)=>{
 
 const getAllProductDB = async(searchItem?:string)=>{
     
-  console.log(searchItem)
+  
     if(searchItem){
         // 'i' for case-insensitive
         return await ProductModel.find({

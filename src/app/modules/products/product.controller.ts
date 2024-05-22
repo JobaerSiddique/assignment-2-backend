@@ -38,7 +38,7 @@ const getAllProduct = async(req:Request,res:Response)=>{
         let products ;
         if(searchProduct){
             products = await productService.getAllProductDB(searchProduct)
-            console.log("searc",products.length)
+            
             res.status(200).json({
                 success:true,
                 message:`Products matching search term ${searchProduct} fetched successfully!`,

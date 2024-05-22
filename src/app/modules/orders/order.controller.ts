@@ -30,13 +30,16 @@ const createOrder = async (req: Request,res:Response)=>{
 
 
 const getAllOrder = async (req: Request,res:Response)=>{
-    
+    const email= req.query.email as string
     try {
-        const email= req.query.email as string
         let orders;
     if(email){
      orders = await orderServices.getAllOrdersDB(email)
-     
+     res.status(200).json({
+        success:true,
+        message:`Orders fetched successfully for ${email}!`,
+        data:orders
+    })
     }
      
         orders = await orderServices.getAllOrdersDB()
