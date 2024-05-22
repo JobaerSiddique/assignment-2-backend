@@ -10,11 +10,26 @@ const createProductIntoDB = async (productData: TProducts)=>{
 }
 
 
-const getAllProductDB = async(search?:string)=>{
-    const searchItem = await ProductModel.findOne({name:search})
-    const allProduct = await ProductModel.find({})
-    return {
-        searchItem,allProduct
+const getAllProductDB = async(searchItem?:string)=>{
+    // const searchItem = await ProductModel.findOne({name:search})
+    // const allProduct = await ProductModel.find({})
+    // return {
+    //     searchItem,allProduct
+    // }
+  console.log(searchItem)
+    if(searchItem){
+        // 'i' for case-insensitive
+        return await ProductModel.find({
+          $or: [
+            { name: { $regex: searchItem,$options:'i' } },
+            { description: { $regex: searchItem, $options:'i' } },
+            { tags: { $regex: searchItem, $options:'i' } }
+          ],
+          isDeleted: false
+        });
+    }
+    else{
+        return await ProductModel.find({})
     }
 }
 

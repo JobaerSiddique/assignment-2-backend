@@ -32,29 +32,31 @@ const CreateProducts = async(req:Request,res:Response)=>{
 
 
 const getAllProduct = async(req:Request,res:Response)=>{
-    const {searchProduct} = req.query
+    const searchProduct = req.query.searchTerm as string | undefined 
     console.log(searchProduct)
     try {
-        let searchItem : any = {}
+        let products ;
         if(searchProduct){
-            searchItem.name  ={$regex:searchProduct,}
-            console.log("searchItem",searchItem)
-        }
-            const search  = await ProductModel.find(searchItem)
-            return res.status(200).json({
+            products = await productService.getAllProductDB(searchProduct)
+            console.log("searc",products.length)
+            res.status(200).json({
                 success:true,
-            message:"Products fetched successfully!",
-            data:search
+                message:`Products matching search term ${searchProduct} fetched successfully!`,
+                data:products
             })
+        }
+        else{
+            products = await productService.getAllProductDB()
+            console.log(products)
+            res.status(200).json({
+                success:true,
+                message:"Product fetched successfully!",
+                data:products
+            })
+        }
+           
         
-        // else{
-        //     const products = await productService.getAllProductDB()
-        // res.status(200).json({
-        //     success:true,
-        //     message:"Products fetched successfully!",
-        //     data:products
-        // })
-        // }
+        
     } catch (error) {
         res.send(error)
     }
