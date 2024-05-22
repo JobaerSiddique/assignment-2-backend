@@ -62,18 +62,7 @@ const ProductSchema = new Schema<TProducts>({
     }
 })
 
-//static method for duplicate createProduct
 
-ProductSchema.pre('find', function (next) {
-    this.find({ isDeleted: { $ne: true } });
-    next();
-  });
-  
-
-ProductSchema.pre('findOne',function(next){
-    this.find({isDeleted:{$ne:true}})
-    next()
-})
 
 
 export const ProductModel = model<TProducts>('Product',ProductSchema)
