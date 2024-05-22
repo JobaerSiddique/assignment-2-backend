@@ -88,23 +88,21 @@ const deleteProducts = async(req:Request,res:Response)=>{
         const {productId}= req.params;
     const result = await productService.deleteProductsDB(productId)
 
-    if(result.modifiedCount >0){
+  
         res.status(200).json({
             success:true,
             message:"Product deleted successfully!",
             data:null
         })
-    }
-    else{
-        res.status(404).json({ 
-            success: false, 
-            message: "Product not found or already deleted" });
-
-    }
     
     
-    } catch (error) {
-        console.log("err",error)
+    
+    
+    } catch (error:any) {
+       res.status(400).json({
+        success:false,
+        message:error.message
+       })
     }
 }
 

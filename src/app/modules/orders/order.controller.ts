@@ -11,38 +11,20 @@ const createOrder = async (req: Request,res:Response)=>{
    try {
     const OrderCollection = req.body;
     const orderVaild =  orderValidation.parse(OrderCollection)
-    // check product
-    const Products = await ProductModel.findById(OrderCollection.productId)
-    
-    if(!Products){
-       return res.status(404).json({
-            success:false,
-            message:"Order not found"
-        })
-    }
-
-    //check available quantity for the products
-    if(Products.inventory.quantity < OrderCollection.quantity){
-        return res.status(400).json({
-            success: false,
-            message:"Insufficient quantity available in inventory"
-        })
-    }
     const orders = await orderServices.createOrders(orderVaild)
+   
     
-    
-    // update productInformation
-    Products.inventory.quantity = Products.inventory.quantity - OrderCollection.quantity
-    Products.inventory.inStock = Products.inventory.quantity>0
-    await Products.save()
     res.status(200).json({
         success:true,
         message:"Order created successfully!",
         data:orders
     })
     
-   } catch (error) {
-    console.log(error)
+   } catch (error: any) {
+    res.status(400).json({
+        success:false,
+        message:error.message
+    })
    }
 }
 
@@ -64,8 +46,11 @@ const getAllOrder = async (req: Request,res:Response)=>{
          data:orders
      })
      
-  } catch (error) {
-    console.log(error)
+  } catch (error:any) {
+    res.status(400).json({
+        success:false,
+        message: error.message
+    })
   }
 }
 

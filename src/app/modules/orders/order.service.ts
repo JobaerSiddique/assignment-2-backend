@@ -5,12 +5,35 @@ import { orderModel } from "./order.model";
 
 
 const createOrders = async(orders:TOrder)=>{
-    console.log("orders",orders)
-    const {productId}= orders
-    const findProduct = await ProductModel.findById(productId)
-  
-    const orderInsert = await orderModel.create(orders)
-    return {orderInsert,findProduct}
+    
+    const {productId,quantity}= orders
+    console.log("find",productId,quantity)
+    
+        // find the products for productDb
+    const product = await ProductModel.findById(productId)
+
+    if(!product){
+        throw new Error('Product not Found')
+    }
+
+    // check quantity for 0
+    if(product.inventory.quantity < quantity){
+        
+        throw new Error('Insufficient stock');
+    }
+
+     //update the product inventory after create order
+    product.inventory.quantity = product?.inventory.quantity - quantity
+    product.inventory.inStock = product.inventory.quantity > 0
+
+    await product.save()
+        // create order
+    const newOrder = await orderModel.create(orders)
+    return newOrder
+
+   
+
+    
 }
 
 

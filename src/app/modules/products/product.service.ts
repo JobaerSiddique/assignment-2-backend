@@ -40,9 +40,7 @@ const getSingleProductsDB  = async(id:string)=>{
 
 const deleteProductsDB = async(id:string)=>{
     
-    const deletedProducts = await ProductModel.updateOne({_id:id},{
-        $set:{isDeleted:true}
-    })
+    const deletedProducts = await ProductModel.findByIdAndDelete(id)
    
     return deletedProducts
 }
