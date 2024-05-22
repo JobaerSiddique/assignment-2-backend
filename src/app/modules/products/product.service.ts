@@ -1,6 +1,6 @@
 import { TProducts } from "./product.interface";
 import { ProductModel } from "./product.model";
-const ObjectId = require('mongodb').ObjectId;
+
 
 
 const createProductIntoDB = async (productData: TProducts)=>{
@@ -40,7 +40,9 @@ const getSingleProductsDB  = async(id:string)=>{
 
 const deleteProductsDB = async(id:string)=>{
     
-    const deletedProducts = await ProductModel.updateOne({id},{isDeleted:true})
+    const deletedProducts = await ProductModel.updateOne({_id:id},{
+        $set:{isDeleted:true}
+    })
    
     return deletedProducts
 }

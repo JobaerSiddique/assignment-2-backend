@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ProductValidationSchema, updateProductValidation } from "./product.zod";
 import { productService } from "./product.service";
-import { ProductModel } from "./product.model";
+
 
 
 
@@ -67,15 +67,18 @@ const getAllProduct = async(req:Request,res:Response)=>{
 const getSingleProduct = async(req:Request,res:Response)=>{
     try {
         const {productId}= req.params;
-    console.log("productId",productId)
+    
     const result = await productService.getSingleProductsDB(productId)
    res.status(200).json({
     success:true,
     message:"Product fetched successfully!",
     data:result
    })
-    } catch (error) {
-        
+    } catch (error:any) {
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
     }
 }
 
@@ -85,11 +88,20 @@ const deleteProducts = async(req:Request,res:Response)=>{
         const {productId}= req.params;
     const result = await productService.deleteProductsDB(productId)
 
-    res.status(200).json({
-        success:true,
-        message:"Product deleted successfully!",
-        data:result
-    })
+    if(result.modifiedCount >0){
+        res.status(200).json({
+            success:true,
+            message:"Product deleted successfully!",
+            data:null
+        })
+    }
+    else{
+        res.status(404).json({ 
+            success: false, 
+            message: "Product not found or already deleted" });
+
+    }
+    
     
     } catch (error) {
         console.log("err",error)

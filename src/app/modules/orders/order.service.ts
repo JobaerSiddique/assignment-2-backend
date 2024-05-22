@@ -6,7 +6,7 @@ import { orderModel } from "./order.model";
 
 const createOrders = async(orders:TOrder)=>{
     console.log("orders",orders)
-    const {productId,quantity}= orders
+    const {productId}= orders
     const findProduct = await ProductModel.findById(productId)
   
     const orderInsert = await orderModel.create(orders)
