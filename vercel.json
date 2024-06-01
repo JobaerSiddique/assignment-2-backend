@@ -6,16 +6,19 @@
             "use":"@vercel/node"
         }
     ],
+    
+        "rewrites": [
+          { "source": "/api/orders", "destination": "/api/orders" }
+        ],
+      
     "routes":[
         {
             "src":"/(.*)",
             "dest":"dist/server.js"
-        },
+        }
         
-        { "src": "/api/orders/create-order", 
-        "dest": "/api/orders" },
-        { "src": "/api/products/create-product", 
-        "dest": "/api/products" }
+       
           
     ]
+    
 }
