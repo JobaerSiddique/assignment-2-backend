@@ -2,9 +2,9 @@ import express from 'express'
 import { productControllers } from './product.controller';
 
 const router = express.Router()
-
-router.post('/',productControllers.CreateProducts)
 router.get('/',productControllers.getAllProduct)
+router.post('/',productControllers.CreateProducts)
+
 router.get('/:productId',productControllers.getSingleProduct)
 router.delete('/:productId', productControllers.deleteProducts)
 router.put('/:productId', productControllers.updateProduct)
