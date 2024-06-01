@@ -47,6 +47,7 @@ const deleteProductsDB = async(id:string)=>{
 
 const getUpdateProductsDB = async(productId:string,updateInfo:any)=>{
     const updatedProducts = await ProductModel.findByIdAndUpdate(productId,updateInfo)
+    console.log(updatedProducts)
     return updatedProducts;
 }
 
