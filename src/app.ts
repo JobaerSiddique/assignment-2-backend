@@ -10,10 +10,10 @@ app.use(express.json())
 app.use(cors())
 
 // routes section
-app.use('/api/products',ProductRoutes)
+app.use('/api/product',ProductRoutes)
 
 // order Route
-app.use('/api/orders', orderRoutes)
+app.use('/api/order', orderRoutes)
 
 // test section
 app.get('/', (req, res) => {
