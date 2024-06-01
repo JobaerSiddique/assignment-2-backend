@@ -31,9 +31,7 @@ const getAllProductDB = (searchItem) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 const getSingleProductsDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("id", id);
     const getProductId = yield product_model_1.ProductModel.findById(id);
-    console.log("getser", getProductId);
     return getProductId;
 });
 const deleteProductsDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -42,6 +40,7 @@ const deleteProductsDB = (id) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getUpdateProductsDB = (productId, updateInfo) => __awaiter(void 0, void 0, void 0, function* () {
     const updatedProducts = yield product_model_1.ProductModel.findByIdAndUpdate(productId, updateInfo);
+    console.log(updatedProducts);
     return updatedProducts;
 });
 exports.productService = {

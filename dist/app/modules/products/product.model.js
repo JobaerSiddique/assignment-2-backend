@@ -55,13 +55,4 @@ const ProductSchema = new mongoose_1.Schema({
         default: false
     }
 });
-//static method for duplicate createProduct
-ProductSchema.pre('find', function (next) {
-    this.find({ isDeleted: { $ne: true } });
-    next();
-});
-ProductSchema.pre('findOne', function (next) {
-    this.find({ isDeleted: { $ne: true } });
-    next();
-});
 exports.ProductModel = (0, mongoose_1.model)('Product', ProductSchema);

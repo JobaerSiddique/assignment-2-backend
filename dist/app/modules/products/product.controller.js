@@ -15,11 +15,9 @@ const product_service_1 = require("./product.service");
 const CreateProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const proudcts = req.body;
-        console.log(proudcts);
         const vaildationProduct = product_zod_1.ProductValidationSchema.parse(proudcts);
         // console.log(vaildationProduct)
         const result = yield product_service_1.productService.createProductIntoDB(vaildationProduct);
-        console.log(result);
         res.status(200).json({
             success: true,
             message: "Product created sucessfully",
@@ -27,17 +25,14 @@ const CreateProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (error) {
-        if (error) {
-            res.status(400).json({
-                success: false,
-                message: error
-            });
-        }
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
     }
 });
 const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const searchProduct = req.query.searchTerm;
-    console.log(searchProduct);
     try {
         let products;
         if (searchProduct) {
@@ -50,7 +45,6 @@ const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         else {
             products = yield product_service_1.productService.getAllProductDB();
-            console.log(products);
             res.status(200).json({
                 success: true,
                 message: "Product fetched successfully!",
@@ -82,7 +76,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
 const deleteProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
-        const result = yield product_service_1.productService.deleteProductsDB(productId);
+        yield product_service_1.productService.deleteProductsDB(productId);
         res.status(200).json({
             success: true,
             message: "Product deleted successfully!",
