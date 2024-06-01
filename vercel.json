@@ -12,9 +12,9 @@
             "dest":"dist/server.js"
         },
         
-        { "src": "/api/orders", 
+        { "src": "/api/orders/create-order", 
         "dest": "/api/orders" },
-        { "src": "/api/products", 
+        { "src": "/api/products/create-product", 
         "dest": "/api/products" }
           
     ]
