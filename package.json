@@ -5,7 +5,7 @@
   "scripts": {
     "start:prod": "nodemon ./dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "build":"tsc",
+    "build": "tsc",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,8 +18,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "g": "^2.0.1",
     "mongoose": "^8.4.0",
     "ts-node-dev": "^2.0.0",
+    "vercel": "^32.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

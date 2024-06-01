@@ -7,9 +7,7 @@
         }
     ],
     
-        "rewrites": [
-          { "source": "/api/orders", "destination": "/api/orders" }
-        ],
+       
       
     "routes":[
         {
@@ -19,6 +17,9 @@
         
        
           
-    ]
+    ],
+    "rewrites": [
+        { "source": "/api/orders", "destination": "/api/orders" }
+      ]
     
 }
