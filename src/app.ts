@@ -17,7 +17,7 @@ app.use('/api/orders', orderRoutes)
 
 // test section
 app.get('/', (req, res) => {
-  res.send('Server is Start')
+  res.send('Server is Start Hurray')
 })
 
 export default app;
